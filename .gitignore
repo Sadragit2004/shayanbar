@@ -38,7 +38,6 @@ venv.bak/
 # Media & Static
 media/
 staticfiles/
-static/
 static_root/
 media_root/
 *.jpg
