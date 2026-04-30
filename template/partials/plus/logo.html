@@ -1,0 +1,5 @@
+{% for i in company %}
+
+<a style='width: 100px; '  href="{% url 'main:index' %}"><img style='width: 100px; color:green;' src="{{media_url}}{{i.image_name}}" alt="لوگو سایت"></a>
+
+{% endfor %}

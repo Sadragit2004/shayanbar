@@ -1,0 +1,205 @@
+# Django
+*.log
+*.pot
+*.pyc
+*.pyo
+*.mo
+*.db
+*.sqlite3
+*.sqlite3-journal
+__pycache__/
+*.py[cod]
+$py.class
+
+# Environment
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Media & Static
+media/
+staticfiles/
+static/
+static_root/
+media_root/
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.ico
+*.svg
+*.mp4
+*.mp3
+*.webp
+*.pdf
+*.zip
+*.rar
+*.tar.gz
+
+# Uploads
+uploads/
+uploads/*
+!uploads/.gitkeep
+
+# Media images (all subdirectories)
+media/images/*
+!media/images/.gitkeep
+media/uploads/*
+!media/uploads/.gitkeep
+media/catalogs/*
+!media/catalogs/.gitkeep
+
+# Database
+db.sqlite3
+*.db
+*.sqlite
+
+# Python
+*.egg-info/
+*.egg
+dist/
+build/
+*.whl
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# Django migrations
+*/migrations/*
+!*/migrations/__init__.py
+!*/migrations/__pycache__/__init__.pyc
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Secrets
+*.pem
+*.key
+*.crt
+secrets.json
+config.json
+settings_local.py
+
+# Logs
+logs/
+*.log
+debug.log
+error.log
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Testing
+tests/__pycache__/
+tests/*.pyc
+.coverage
+coverage.xml
+*.cover
+.hypothesis/
+
+# Docker
+*.pid
+docker-compose.override.yml
+Dockerfile.dev
+
+# Node modules (if any)
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Redis
+dump.rdb
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Profiling data
+*.prof
+*.lprof
+
+# Sphinx documentation
+docs/_build/
+
+# PyCharm
+.idea/modules.xml
+.idea/inspectionProfiles/
+.idea/workspace.xml
+
+# VS Code
+.history/
+*.code-workspace
+
+# Linux
+*~
+.directory
+
+# Windows
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Mac
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+*._*
+*.thumbnail.*

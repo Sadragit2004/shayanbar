@@ -1,0 +1,3 @@
+{% for i in blogs %}
+<i><a style='color:green; margin:12px;' href="{% url 'blog:detail' slug=i.slug %}">{{i.subject}}</a></i>
+{% endfor %}

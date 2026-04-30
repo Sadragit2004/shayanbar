@@ -1,0 +1,3 @@
+{% for fi in groups %}
+    <li><a href="{% url 'project:service' slug=fi.slug %}">{{fi.title_group}}</a></li>
+{% endfor %}

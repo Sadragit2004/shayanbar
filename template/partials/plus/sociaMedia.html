@@ -1,0 +1,11 @@
+
+
+
+
+{% for i in social_media %}
+<a href="#" class="text-gray-500 hover:text-white ml-1">
+  {% autoescape off %}
+  {{i.icon}}
+  {% endautoescape %}
+</a>
+{% endfor %}

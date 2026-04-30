@@ -1,0 +1,187 @@
+{% load render_partial %}
+<style>
+:root {
+    --footer-bg: #1C1C1C;
+    --footer-bg-darker: #111111;
+    --footer-text: #A0A0A0;
+    --footer-title: #FFFFFF;
+    --footer-accent: #007bff;
+}
+
+.custom-footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    direction: rtl;
+    line-height: 1.7;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px 40px 20px;
+}
+
+/* بخش توضیحات و تماس */
+.footer-intro {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto 45px auto;
+}
+
+.footer-description {
+    font-size: 15px;
+    color: var(--footer-text);
+    margin-bottom: 20px;
+}
+
+.footer-main-contact {
+    font-size: 16px;
+    color: var(--footer-title);
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.footer-address {
+    font-size: 14px;
+    color: var(--footer-text);
+}
+
+/* شبکه شعبه‌ها */
+.branches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px 30px;
+    margin-bottom: 45px;
+    border-top: 1px solid #333;
+    padding-top: 40px;
+}
+
+.branch-item {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 14px;
+    background: rgba(255,255,255,0.03);
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.branch-item:hover {
+    background: rgba(255,255,255,0.08);
+    transform: translateX(-3px);
+}
+
+.branch-name {
+    font-weight: 600;
+    color: #D0D0D0;
+    min-width: 115px;
+    font-size: 14px;
+}
+
+.branch-phone {
+    direction: ltr;
+    unicode-bidi: embed;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.5px;
+    color: var(--footer-accent);
+    font-weight: 500;
+}
+
+/* جداکننده */
+.footer-divider {
+    width: 100%;
+    height: 1px;
+    background: #333;
+    margin: 15px 0 20px 0;
+}
+
+/* فوتر پایینی */
+.footer-bottom {
+    background-color: var(--footer-bg-darker);
+    padding: 18px;
+    text-align: center;
+    font-size: 13px;
+    border-top: 1px solid #2a2a2a;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+    .branches-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .branch-item {
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-start;
+    }
+    .branch-name {
+        min-width: auto;
+    }
+    .footer-container {
+        padding: 35px 15px 25px 15px;
+    }
+}
+</style>
+
+<footer class="custom-footer">
+    <div class="footer-container">
+        <!-- بخش بالایی: توضیحات و تماس -->
+        <div class="footer-intro">
+            <p class="footer-description">
+                باربری شایان بار تبریز با سال‌ها تجربه در ارائه خدمات حمل‌ونقل ایمن و سریع،
+                آماده جابجایی انواع بارهای سبک و سنگین شما در سطح شهر و بین‌شهری می‌باشد.
+            </p>
+           
+            <div class="footer-address">
+                📍 آدرس دفتر مرکزی: تبریز، ساری زمین
+            </div>
+        </div>
+
+        <!-- بخش شعبه‌ها (ایستگاه‌ها) -->
+        <div class="branches-grid">
+            <div class="branch-item">
+                <span class="branch-name">🚚 شعبه ولیعصر:</span>
+                <span class="branch-phone">3331500</span>
+            </div>
+            <div class="branch-item">
+                <span class="branch-name">🚚 شعبه باغمیشه (نصر):</span>
+                <span class="branch-phone">36601280</span>
+            </div>
+            <div class="branch-item">
+                <span class="branch-name">🚚 شعبه ولیعصر جنوبی:</span>
+                <span class="branch-phone">333241798</span>
+            </div>
+            <div class="branch-item">
+                <span class="branch-name">🚚 شعبه ابرسان:</span>
+                <span class="branch-phone">33340631</span>
+            </div>
+            <div class="branch-item">
+                <span class="branch-name">🚚 شعبه نصف‌راه خطیب:</span>
+                <span class="branch-phone">35453778</span>
+            </div>
+            <div class="branch-item">
+                <span class="branch-name">🚚 شعبه آذربایجان:</span>
+                <span class="branch-phone">35486109</span>
+            </div>
+            <div class="branch-item">
+                <span class="branch-name">🚚 شعبه یاغچیان (پرواز گلشهر):</span>
+                <span class="branch-phone">(بدون شماره)</span>
+            </div>
+            <div class="branch-item">
+                <span class="branch-name">🚚 شعبه میرداماد (زعفرانیه):</span>
+                <span class="branch-phone">33841610</span>
+            </div>
+            <div class="branch-item">
+                <span class="branch-name">🚚 شعبه شاهگلی:</span>
+                <span class="branch-phone">33841610</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        © 1403 کلیه حقوق این سایت برای باربری شایان بار تبریز محفوظ است.
+    </div>
+</footer>

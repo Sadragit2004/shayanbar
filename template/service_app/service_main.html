@@ -1,0 +1,85 @@
+{% load render_partial %}
+
+{% for service in services %}
+<div class="col-12 col-md-6 col-lg-3" data-show="startbox" data-show-delay="300">
+    <!-- Service box - Modified for mobile -->
+    <div class="service-box-mobile">
+        <!-- Service box content -->
+        <div class="service-box lift position-relative rounded-4 bg-gray-light">
+            <div class="service-content-wrapper">
+                <!-- Image/Circle icon on right for mobile -->
+                <div class="circle-icon-mobile">
+                    <div class="circle-icon text-white bg-accent-2">
+                        {% autoescape off %}{{service.svg_file}}{% endautoescape %}
+                    </div>
+                </div>
+
+                <!-- Text content -->
+                <div class="service-text-content">
+                    <div class="h"><a href="{% url 'service:servicedetail' slug=service.slug %}">{{service.title}}</a></div>
+                    <p class="service-box-text font-size-15 mb-30">{{service.text_summery}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Default styles (desktop) - remain unchanged */
+    .service-box {
+        text-align: center;
+        padding: 30px;
+    }
+
+    .circle-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 767.98px) {
+        .service-box-mobile {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .service-content-wrapper {
+            display: flex;
+            width: 100%;
+            align-items: flex-start;
+        }
+
+        .circle-icon-mobile {
+            order: 2;
+            margin-left: 15px;
+        }
+
+        .circle-icon {
+            margin: 0;
+            width: 60px;
+            height: 60px;
+        }
+
+        .service-text-content {
+            order: 1;
+            flex: 1;
+            text-align: right;
+        }
+
+        .service-box {
+            padding: 15px;
+            text-align: initial;
+            width: 100%;
+        }
+
+        .service-box-text {
+            margin-bottom: 15px !important;
+        }
+    }
+</style>
+{% endfor %}

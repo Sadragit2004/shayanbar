@@ -1,0 +1,78 @@
+<style>
+    .custom-resume-section {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        padding: 50px 15px;
+        background-color: #f8f9fa;
+        direction: rtl;
+    }
+
+    .custom-resume-section .section-title {
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    .resume-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px; /* فاصله بین کارت‌ها */
+        margin: 0 auto;
+        max-width: 1200px;
+    }
+
+    /* ⬇️ تغییر اصلی در این بخش اعمال شده است ⬇️ */
+    .resume-card {
+        background-color: #ffffff;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        padding: 24px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        /* این استایل باعث می‌شود کارت‌ها همیشه (حتی در موبایل) در دو ستون قرار بگیرند */
+        flex-basis: calc(50% - 12px); /* 12px نصف فاصله (gap) است */
+    }
+
+    .resume-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .resume-card .card-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #007bff;
+        margin: 0 0 10px 0;
+    }
+
+    .resume-card .card-answer {
+        font-size: 1rem;
+        color: #6c757d;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* ❌ بخش @media query از اینجا حذف شد. */
+
+</style>
+
+<section class="custom-resume-section">
+
+    <h2 class="section-title">رزومه در یک نگاه</h2>
+
+    <div class="resume-grid">
+        {% for re in resums %}
+            <div class="resume-card">
+                <div class="card-title">{{ re.title }}</div>
+                <p class="card-answer">{{ re.answer }}</p>
+            </div>
+        {% empty %}
+            <p style="text-align: center; color: #6c757d;">موردی برای نمایش وجود ندارد.</p>
+        {% endfor %}
+    </div>
+
+</section>

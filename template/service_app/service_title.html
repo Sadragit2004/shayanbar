@@ -1,0 +1,5 @@
+{% for i in services  %}
+
+<li><a style='color:green; margin:12px;' href="{% url 'service:servicedetail' slug=i.slug %}">{{i.title}}</a></li>
+
+{% endfor %}

@@ -1,0 +1,40 @@
+<section class="my-20 px-4">
+    <div class="container mx-auto max-w-screen-xl">
+        <div class="text-center mb-10">
+            <div class="text-3xl font-YekanBakh-ExtraBlack">نظرات کاربران</div>
+            <p class="text-stone-700 mt-2">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ</p>
+        </div>
+        <div class="swiper customer">
+            <div class="swiper-wrapper">
+
+                {% for com in comments %}
+                <div class="swiper-slide">
+                    <div class="flex items-center justify-center">
+                        <div class="bg-white rounded-2xl w-full sm:w-3/4 p-8 leading-8 text-center">
+                                <p>
+
+                                    {{com.text}}
+
+                                </p>
+                                <div class="flex items-center justify-center mt-4">
+                                    <div class="avatar ml-4">
+                                        <div class="w-24 rounded-full">
+                                          <img alt='اواتار کامنت' src="{{media_url}}images/avatar-3.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <div class="font-YekanBakh-Bold text-slate-800 text-sm">{{com.full_name}}</div>
+                                    </div>
+
+                                </div>
+                        </div>
+                    </div>
+                  </div>
+                {% endfor %}
+
+            </div>
+            <div class="swiper-pagination static mt-4"></div>
+          </div>
+    </div>
+
+</section>

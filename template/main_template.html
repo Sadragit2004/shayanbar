@@ -1,0 +1,48 @@
+{% load static %}
+{% load render_partial %}
+<!DOCTYPE html>
+<html lang="fa-IR" dir='rtl'>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="apple-mobile-web-app-title" content=" ">
+      <meta name="application-name" content=" ">
+      <link rel="alternate" href="https://www.shayanbartbz.ir/" hreflang="fa-IR" />
+      <meta name="msapplication-TileColor" content="#358597">
+      <meta name="theme-color" content="#ffffff">
+      <meta property="og:locale" content="fa_IR" />
+      <meta property="og:type" content="website" />
+
+
+          {% block meta1 %}
+
+          {% endblock meta1 %}
+
+
+
+<link rel="stylesheet" href="{% static 'assets/vendors/css/magnific-popup.css' %}">
+<link rel="stylesheet" href="{% static 'assets/vendors/css/swiper-bundle.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/cus.css' %}">
+
+
+
+  </head>
+
+<body class='has-topbar'>
+
+
+    {% include "partials/header.html" %}
+
+
+    {% block content %}
+
+    {% endblock content %}
+
+    {% include "partials/footer.html" %}
+
+    {% include "partials/scripts.html" %}
+
+</body>
+
+</html>

@@ -1,0 +1,435 @@
+{% extends "main_template.html" %}
+
+{% block meta1 %}
+    {# بلوک متاتگ‌های شما بدون تغییر باقی می‌ماند #}
+    <title>{{meta.page_title}}</title>
+    <meta name="description" content="{{meta.description}}"/>
+    {% if meta.index == True %}
+    <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
+    {% else %}
+    <meta name="robots" content="nofollow, noindex, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
+    {% endif %}
+    <meta property="og:title" content="{{meta.page_title}}" />
+    <meta property="og:description" content="{{meta.description}}" />
+    <meta property="og:site_name" content="{{meta.site_name}}" />
+    <meta property="og:updated_time" content="{{meta.updated_at}}" />
+    <meta property="og:image" content="{{meta.og_image}}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="{{meta.alt}}" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="article:published_time" content="{{meta.created_at}}" />
+    <meta property="article:modified_time" content="{{meta.updated_at}}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{meta.page_title}}" />
+    <meta name="twitter:description" content="{{meta.description}}" />
+    <meta name="twitter:site" content="@shayanbar_com" />
+    <meta name="twitter:creator" content="@shayanbar_com" />
+    <meta name="twitter:image" content="{{meta.og_image}}" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="صدرا ابادکار" />
+    <meta name="twitter:label2" content="Time to read" />
+    <meta name="twitter:data2" content="کمتر از یک دقیقه" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting", /* تغییر به BlogPosting برای سئوی بهتر مقالات */
+        "headline": "{{ meta.page_title }}",
+        "description": "{{ meta.description }}",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ request.build_absolute_uri }}"
+        },
+        "image": "{{ meta.og_image }}",
+        "inLanguage": "fa",
+        "datePublished": "{{ meta.created_at }}",
+        "dateModified": "{{ meta.updated_at }}",
+        "author": {
+            "@type": "Person",
+            "name": "صدرا ابادکار" /* نام نویسنده از context بیاید بهتر است */
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "{{ meta.site_name }}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{ site_logo_url }}"
+            }
+        }
+    }
+    </script>
+
+    <style>
+        /* CSS Reset and Basic Styles */
+        :root {
+            --primary-color: #3b82f6; /* رنگ اصلی */
+            --text-color: #334155; /* رنگ متن */
+            --text-light: #64748b;
+            --bg-color: #ffffff;
+            --bg-alt: #f1f5f9;
+            --border-color: #e2e8f0;
+        }
+        body { direction: rtl; }
+
+        /* Scroll Progress Bar */
+        .scroll-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--primary-color);
+            transform-origin: 0%;
+            z-index: 1000;
+        }
+
+        /* Post Header Section */
+        .post-header {
+            padding: 60px 20px;
+            text-align: center;
+            {{ blog.title_background_css|safe }} /* <-- بک‌گراند داینامیک از اینجا خوانده می‌شود */
+            color: #fff;
+            background: linear-gradient(45deg, #2c3e50, #3498db); /* بک‌گراند پیش‌فرض */
+        }
+        .post-header .category-link {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 5px 15px;
+            border-radius: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background .3s;
+        }
+        .post-header .category-link:hover { background: rgba(255, 255, 255, 0.3); }
+        .post-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+            color: #fff;
+        }
+        .post-meta { display: flex; justify-content: center; align-items: center; gap: 20px; font-size: 14px; opacity: 0.9; }
+
+        /* Featured Image */
+        .featured-image-container {
+            text-align: center;
+            padding: 40px 20px 0 20px;
+        }
+        .featured-image-container img {
+            max-width: 100%;
+            width: 700px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Main Content Area */
+        .post-layout-container {
+            display: flex;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .post-content { flex: 1; min-width: 0; }
+
+        /* Article Body Styles */
+        .article-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+        .article-body h2, .article-body h3 {
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 2em;
+            margin-bottom: 1em;
+            scroll-margin-top: 80px; /* برای پرش صحیح لینک‌های فهرست */
+        }
+        .article-body h2 { font-size: 1.8rem; }
+        .article-body h3 { font-size: 1.4rem; }
+        .article-body a { color: var(--primary-color); text-decoration: none; border-bottom: 1px solid; }
+
+        /* Sidebar & Table of Contents (Desktop) */
+        .post-sidebar {
+            width: 280px;
+            position: sticky;
+            top: 80px;
+            align-self: flex-start;
+        }
+        .toc { background: var(--bg-alt); padding: 20px; border-radius: 8px; }
+        .toc h4 { margin: 0 0 15px 0; font-weight: 700; }
+        .toc-list { list-style: none; padding: 0; margin: 0; }
+        .toc-list li a {
+            display: block;
+            padding: 8px 10px;
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            border-right: 3px solid transparent;
+            transition: all .3s;
+        }
+        .toc-list li a:hover { background: #e2e8f0; color: var(--text-color); }
+        .toc-list li a.active {
+            color: var(--primary-color);
+            background: #ddeafe;
+            font-weight: bold;
+            border-right-color: var(--primary-color);
+        }
+
+        /* Mobile TOC */
+        .mobile-toc { display: none; margin-bottom: 30px; }
+        .mobile-toc details {
+            background: var(--bg-alt);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+        .mobile-toc summary {
+            padding: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+        }
+        .mobile-toc .toc-list { padding: 0 15px 15px 15px; }
+
+
+        /* Author Box */
+        .author-box {
+            margin-top: 50px;
+            padding: 30px;
+            background: var(--bg-alt);
+            border-radius: 8px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .author-box img { width: 80px; height: 80px; border-radius: 50%; }
+        .author-box h5 { margin: 0 0 5px 0; font-weight: bold; }
+        .author-box p { margin: 0; font-size: 14px; color: var(--text-light); }
+
+        /* Responsive Styles */
+        @media (max-width: 991px) {
+            .post-sidebar { display: none; }
+            .mobile-toc { display: block; }
+        }
+
+
+        .article-body p {
+    text-align: justify; /* متن را از دو طرف تراز می‌کند */
+    line-height: 1.9;    /* فاصله بین خطوط برای خوانایی بهتر */
+    hyphens: auto;       /* برای شکستن هوشمند کلمات طولانی در زبان انگلیسی */
+}
+
+/* * بخش دوم: استایل اصلی و زیبای جدول (نمایش در دسکتاپ)
+*/
+.article-body table {
+    width: 100%;                     /* عرض کامل */
+    border-collapse: collapse;         /* حذف فاصله بین سلول‌ها */
+    margin: 40px 0;                  /* فاصله از بالا و پایین */
+    font-size: 1rem;                   /* اندازه فونت استاندارد */
+    text-align: right;                 /* چینش متن به راست برای فارسی */
+    overflow: hidden;                  /* برای اعمال border-radius */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* سایه زیبا و مدرن */
+    border-radius: 12px;               /* گوشه‌های گرد و نرم */
+}
+
+/* استایل هدر (سرتیتر) جدول */
+.article-body th {
+    background-color: #3b82f6; /* یک رنگ آبی جذاب به عنوان رنگ اصلی */
+    color: #ffffff;                  /* متن سفید */
+    font-weight: bold;               /* فونت ضخیم */
+    padding: 18px 15px;              /* فاصله داخلی سلول‌ها */
+    text-transform: uppercase;       /* حروف بزرگ (برای انگلیسی) */
+    letter-spacing: 1px;             /* فاصله بین حروف */
+}
+
+/* استایل سلول‌های بدنه جدول */
+.article-body td {
+    padding: 15px;                   /* فاصله داخلی */
+    border-bottom: 1px solid #e2e8f0; /* خط جداکننده بسیار کمرنگ */
+    color: #334155;                  /* رنگ متن اصلی */
+}
+
+/* استایل ردیف‌های بدنه جدول */
+.article-body tbody tr {
+    transition: background-color 0.3s ease; /* انیمیشن نرم در هاور */
+}
+
+/* ایجاد حالت گورخری (Zebra) برای خوانایی بهتر ردیف‌ها */
+.article-body tbody tr:nth-of-type(even) {
+    background-color: #f8fafc;
+}
+
+/* حذف خط جداکننده از آخرین ردیف */
+.article-body tbody tr:last-of-type {
+    border-bottom: 2px solid #3b82f6;
+}
+
+/* افکت هاور زیبا برای ردیف‌ها */
+.article-body tbody tr:hover {
+    background-color: #ddeafe; /* هایلایت شدن ردیف با رنگ آبی روشن */
+    cursor: pointer;
+}
+
+
+/* * بخش سوم: واکنش‌گرایی جدول (نمایش در موبایل)
+ * این بخش مهم‌ترین قسمت برای نمایش صحیح در صفحات کوچک است.
+*/
+@media (max-width: 768px) {
+    /* * در موبایل، هدر اصلی جدول پنهان می‌شود و جدول به صورت کارت‌های
+     * مجزا نمایش داده می‌شود که خواندن آن بسیار ساده‌تر است.
+    */
+
+    .article-body thead {
+        display: none; /* پنهان کردن هدر اصلی */
+    }
+
+    .article-body tr {
+        display: block;  /* هر ردیف به یک بلاک مجزا تبدیل می‌شود */
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .article-body td {
+        display: flex;         /* استفاده از flexbox برای چینش */
+        justify-content: space-between; /* متن و عنوان در دو طرف قرار می‌گیرند */
+        align-items: center;
+        text-align: right;     /* تراز متن به راست */
+        border-bottom: 1px solid #f1f5f9; /* جداکننده داخلی بین فیلدها */
+    }
+
+    /* این بخش جادویی، عنوان هر سلول را از هدر جدول خوانده و قبل از آن نمایش می‌دهد */
+    .article-body td::before {
+        content: attr(data-label); /* خواندن عنوان از اتریبیوت data-label */
+        font-weight: bold;
+        color: #3b82f6; /* رنگ آبی برای عنوان */
+        margin-left: 10px; /* فاصله از مقدار */
+        white-space: nowrap;
+    }
+
+    .article-body td:last-child {
+        border-bottom: none; /* حذف خط از آخرین فیلد کارت */
+    }
+}
+
+
+    </style>
+
+{% endblock meta1 %}
+
+{% block content %}
+    <div class="scroll-progress-bar"></div>
+
+    <article>
+        <header class="post-header">
+            <a href="#" class="category-link">{{ blog.category|default:"دسته بندی نشده" }}</a>
+            <h1>{{ blog.name_blog }}</h1>
+            <div class="post-meta">
+                <span>{{ blog.author_name|default:"تیم محتوا" }}</span>
+                <span>•</span>
+                <span>{{ blog.created_at|date:"d F Y" }}</span>
+                <span>•</span>
+                <span>{{ blog.reading_time|default:"5 دقیقه مطالعه" }}</span>
+            </div>
+        </header>
+
+        <div class="featured-image-container">
+            <img loading="lazy" src="{{media_url}}{{blog.image_name}}" alt="{{blog.name_blog}}">
+        </div>
+
+        <div class="post-layout-container">
+
+            <div class="post-content">
+
+                <div class="mobile-toc">
+                    <details>
+                        <summary>فهرست مطالب</summary>
+                        <nav>
+                            <ul class="toc-list">
+                                </ul>
+                        </nav>
+                    </details>
+                </div>
+
+                <div class="article-body">
+                    {% autoescape off %}
+                    {{ blog.description2 }}
+                    {% endautoescape %}
+                </div>
+
+                <div class="author-box">
+                    <img src="{{ blog.author_avatar_url|default:'/static/images/default-avatar.png' }}" alt="{{ blog.author_name|default:'نویسنده' }}">
+                    <div>
+                        <div>{{ blog.author_name|default:"تیم محتوا" }}</div>
+                        <p>{{ blog.author_bio|default:"نویسنده و تولیدکننده محتوا در این وب‌سایت." }}</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <aside class="post-sidebar">
+                <div class="toc">
+                    <div>در این مقاله می‌خوانید:</div>
+                    <nav>
+                        <ul class="toc-list">
+                            </ul>
+                    </nav>
+                </div>
+            </aside>
+        </div>
+    </article>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const content = document.querySelector('.article-body');
+        const tocLists = document.querySelectorAll('.toc-list');
+        const headings = content.querySelectorAll('h2, h3');
+        const progressBar = document.querySelector('.scroll-progress-bar');
+
+        if (headings.length === 0) {
+            document.querySelectorAll('.toc, .mobile-toc').forEach(el => el.style.display = 'none');
+        }
+
+        // 1. Generate Table of Contents
+        headings.forEach((heading, index) => {
+            const id = `heading-${index}`;
+            heading.id = id;
+
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = `#${id}`;
+            a.textContent = heading.textContent;
+            a.className = `toc-level-${heading.tagName.toLowerCase()}`;
+            li.appendChild(a);
+
+            tocLists.forEach(list => list.appendChild(li.cloneNode(true)));
+        });
+
+        // 2. Scroll Progress Bar
+        const updateProgressBar = () => {
+            const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (window.scrollY / scrollableHeight) * 100;
+            progressBar.style.transform = `scaleX(${scrolled / 100})`;
+        };
+
+        // 3. TOC Active Link Highlighting (Scroll Spy)
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                const id = entry.target.getAttribute('id');
+                const correspondingLink = document.querySelector(`.toc-list a[href="#${id}"]`);
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.toc-list a.active').forEach(a => a.classList.remove('active'));
+                    correspondingLink.classList.add('active');
+                }
+            });
+        }, { rootMargin: "0px 0px -70% 0px" });
+
+        headings.forEach(heading => observer.observe(heading));
+
+        // Event Listeners
+        window.addEventListener('scroll', updateProgressBar);
+    });
+    </script>
+{% endblock content %}

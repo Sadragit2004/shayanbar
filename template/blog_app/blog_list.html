@@ -1,0 +1,81 @@
+{% extends "main_template.html" %}
+{% load render_partial %}
+
+{% block meta1 %}
+
+<title>مقالات تخصصی باربری و حملونقل | شایان بار</title>
+<meta name="description" content="مجموعه مقالات آموزشی و تخصصی در زمینه باربری، حملونقل زمینی و هوایی، قوانین گمرکی و بهترین روش‌های حمل بار. به‌روزترین مطالب از شایان بار." />
+
+<meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:title" content="مقالات تخصصی باربری و حملونقل | شایان بار" />
+<meta property="og:description" content="مجموعه مقالات آموزشی و تخصصی در زمینه باربری، حملونقل زمینی و هوایی، قوانین گمرکی و بهترین روش‌های حمل بار. به‌روزترین مطالب از شایان بار." />
+<meta property="og:site_name" content="شایان بار" />
+<meta property="og:updated_time" content="{{ meta.updated_at }}" />
+<meta property="og:image" content="{{ meta.og_image }}" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="مقالات تخصصی باربری شایان بار" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="article:published_time" content="{{ meta.created_at }}" />
+<meta property="article:modified_time" content="{{ meta.updated_at }}" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="مقالات تخصصی باربری و حملونقل | شایان بار" />
+<meta name="twitter:description" content="مجموعه مقالات آموزشی و تخصصی در زمینه باربری، حملونقل زمینی و هوایی، قوانین گمرکی و بهترین روش‌های حمل بار. به‌روزترین مطالب از شایان بار." />
+<meta name="twitter:site" content="@shayanbar_com" />
+<meta name="twitter:creator" content="@shayanbar_com" />
+<meta name="twitter:image" content="{{ meta.og_image }}" />
+<meta name="twitter:label1" content="نویسنده" />
+<meta name="twitter:data1" content="تیم تحریریه شایان بار" />
+<meta name="twitter:label2" content="زمان مطالعه" />
+<meta name="twitter:data2" content="کمتر از یک دقیقه" />
+
+
+{% endblock meta1 %}
+
+{% block content %}
+
+ <div class="content-wrap ">
+        <!-- Page title-->
+        <div class="position-relative py-210">
+            <div class="background">
+                <div class="background-image jarallax" data-jarallax data-speed="0.8"><img class="jarallax-img" loading="lazy" src="{{media_url}}/img/portfolio/projects-hero-1920x1080.jpg" alt="بک گراند لیست مقالات"></div>
+                <div class="background-color" style="--background-color: #000; opacity: .25;"></div>
+            </div>
+            <div class="container">
+                <h1 class="text-white mb-0 text-center">مقالات</h1>
+            </div>
+        </div><!-- Portfolio section-->
+        <div class="pb-130 pt-80 footerPrev">
+            <div class="container">
+                <!-- Isotope-->
+                <div class="isotope">
+
+                    <div class="row isotope-grid gy-30">
+
+                        {% for blog in blogs %}
+                        <div class=" isotope-item col-12 col-md-6 col-lg-4" data-filters="marketing">
+                        <a class="card card-portfolio  card-hover-bar bg-white text-dark text-center rounded-4" href="{% url 'mag:detail' slug=blog.slug %}">
+
+                                <span class="card-img" data-img-height style="--img-height: 92%;">
+                                    <img loading="lazy" src="{{media_url}}{{blog.image_name}}" alt="{{blog.name_blog}}"></span>
+
+
+                                    <span class="card-category subtitle"><a href="{% url 'mag:detail' slug=blog.slug %}">{{blog.name_blog}}</a></span></span>
+
+                                </a>
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+            </div>
+        </div><!-- Call to action-->
+
+    </div>
+{% endblock content %}

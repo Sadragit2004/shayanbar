@@ -1,0 +1,3 @@
+{% for i in groups %}
+    <li><a href="{% url 'blog:show-blog' slug=i.slug %}">{{i.group_name}}</a></li>
+{% endfor %}

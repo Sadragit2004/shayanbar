@@ -1,0 +1,19 @@
+
+            {% for blog in blogs %}
+
+           <div class="swiper-slide">
+                                <!-- Industry-->
+                                <div class="industry position-relative rounded-4 overflow-hidden"><a class="industry-link stretched-link" href="#"></a>
+                                    <div class="industry-image" data-img-height style="--img-height: 114%;"><img loading="lazy" src="{{media_url}}{{blog.image_name}}" alt="{{blog.name_blog}}"></div>
+                                    <div class="industry-body">
+                                        <div class="industry-icon ms-20 text-white"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" fill="none">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 4c0 1.657-4.03 3-9 3S1 5.657 1 4m18 0c0-1.657-4.03-3-9-3S1 2.343 1 4m18 0v14c0 1.66-4 3-9 3s-9-1.34-9-3V4m18 7c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                                            </svg></div>
+                                        <div class="industry-title m-0 text-white ff-custom fw-normal"><a style='color:#ffff;' href="{% url 'mag:detail' slug=blog.slug %}">{{blog.subject}}</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+
+            {% endfor %}
+
+
